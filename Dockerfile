@@ -63,14 +63,6 @@ ENV TZ=Asia/Tokyo
 # # 	make install && \
 # # 	cd .. && rm -rf cmake
 
-#####################################################
-# purge Python 3.6
-#####################################################
-# RUN apt-get purge --auto-remove python3.6 -y
-
-# RUN apt-get update
-# RUN apt-get install -y software-properties-common
-# RUN rm -rf /var/lib/apt/lists/*
 
 #####################################################
 # Python 3.7
@@ -81,58 +73,33 @@ RUN apt-get update && apt-get install -y \
 	python3.7 \
 	python3-pip \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN python3.7 -m pip install pip
-# シンボリックリンクの設定場所に移動
-# python2.7へのシンボリックリンク(デフォルトの設定)を削除
-# python3.7を新たにpythonへのシンボリックリンクとして設定
-# RUN cd /usr/bin && \
-	# unlink python && \
-	# ln -s python3.7 python
 
-# フルパスのpythonのシンボリックリンクを3.7に書き換え
-#（terminatorの1行目で/usr/bin/pythonを参照しているため）
-# RUN rm /usr/bin/python
-# RUN ln -s /usr/bin/python3.7 /usr/bin/python
-
-
-# python3.7のpipをインストール
-# RUN python3.7 -m pip install pip
-# RUN /usr/bin/python3.7 -m pip install pip
-# python3.7のpipをインストール
-# ENV PATH $PATH:~/.local/bin
-
-# Requirement already satisfied: pip in ./.local/lib/python3.7/site-packages (22.2.2)
-# Requirement already satisfied: pip in /usr/lib/python3/dist-packages
-
-# RUN apt-get update && apt-get install -y terminator
+# 上記だけだとpip3.7コマンドが使用できないため以下を実行
+RUN apt-get update && \
+	apt-get install -y wget && \
+	wget https://bootstrap.pypa.io/get-pip.py && \
+	python3.7 get-pip.py
 
 
 #####################################################
 # Install common pip packages
 #####################################################
 COPY pip/requirements.txt requirements.txt
-RUN python3.7 -m pip install -r requirements.txt
+RUN pip3.7 install -r requirements.txt
 
 
 #####################################################
 # hydra
 #####################################################
-RUN python3.7 -m pip install hydra-core==1.2.0
-RUN python3.7 -m pip install transforms3d==0.3.1
+RUN pip3.7 install hydra-core==1.2.0
+RUN pip3.7 install transforms3d==0.3.1
 
 
 #####################################################
 # Install common pip packages
 #####################################################
 COPY pip/requirements_tensorflow.txt requirements_tensorflow.txt
-RUN python3.7 -m pip install -r requirements_tensorflow.txt
-
-
-# #####################################################
-# # Pytorch Lightning
-# #####################################################
-# COPY pip/requirements_pytorch_lightning.txt requirements_pytorch_lightning.txt
-# RUN pip install -r requirements_pytorch_lightning.txt
+RUN pip3.7 install -r requirements_tensorflow.txt
 
 
 #####################################################

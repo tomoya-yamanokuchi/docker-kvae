@@ -13,6 +13,6 @@ docker run --rm -it --gpus all --privileged --net=host --ipc=host \
 -v $HOME/.Xauthority:/home/$(id -un)/.Xauthority -e XAUTHORITY=/home/$(id -un)/.Xauthority \
 -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY \
 -v /dev/snd:/dev/snd -e AUDIODEV="hw:Device, 0" \
--v /home/$USER/workspace:/home/$USER/workspace \
+-v /hdd_mount/drkvae:/home/$USER/workspace/drkvae \
 -v /home/$USER/docker-kvae/sample_code:/home/$USER/sample_code \
 docker_kvae
