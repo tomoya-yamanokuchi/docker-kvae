@@ -5,7 +5,7 @@
 # net=host:   ホストとネットワーク名前空間を共有
 # ipc=host:   ホストとメモリ共有
 
-docker run --name bobo --rm -it --gpus all --privileged --net=host --ipc=host \
+docker run --name bobo --rm -it --gpus all --privileged --net=host --ipc=host --device=/dev/video0:/dev/video0 \
 -e DOCKER_USER_NAME=$(id -un) \
 -e DOCKER_USER_ID=$(id -u) \
 -e DOCKER_USER_GROUP_NAME=$(id -gn) \
@@ -14,8 +14,10 @@ docker run --name bobo --rm -it --gpus all --privileged --net=host --ipc=host \
 -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY \
 -v /dev/snd:/dev/snd -e AUDIODEV="hw:Device, 0" \
 -v /hdd_mount/ROBEL-DClaw:/home/$USER/workspace/ROBEL-DClaw \
+-v /hdd_mount/real2sim_ws:/home/$USER/workspace/real2sim_ws \
+-v /hdd_mount/ROBEL_DClaw_hands_on:/home/$USER/workspace/ROBEL_DClaw_hands_on \
 -v /hdd_mount/drkvae:/home/$USER/workspace/drkvae \
 -v /hdd_mount/logs:/home/$USER/workspace/logs \
 -v /hdd_mount/data_npz:/home/$USER/workspace/data_npz \
 -v /home/$USER/docker-kvae/sample_code:/home/$USER/sample_code \
-docker_tensorflow
+docker_ros

@@ -97,54 +97,6 @@ COPY pip/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 
-
-#####################################################
-# ROS
-#####################################################
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
-
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/3bf863cc.pub
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
-
-RUN apt-get update && apt-get install -y \
-	# libfcl* \
-	libglew-dev \
-	libfcl-0.5-dev \
-	ros-kinetic-desktop-full \
-	ros-kinetic-joy \
-	ros-kinetic-gazebo* \
-	ros-kinetic-moveit* \
-	ros-kinetic-image-view* \
-	ros-kinetic-cv-camera* \
-	ros-kinetic-joint* \
-	ros-kinetic-graph* \
-	ros-kinetic-ros-controller* \
-	ros-kinetic-joy-teleop* \
-	ros-kinetic-eigen* \
-	ros-kinetic-rosbridge-server* \
-	ros-kinetic-geometric* \
-	ros-kinetic-object-recognition* \
-	ros-kinetic-map-server* \
-	ros-kinetic-warehouse-ros* \
-	ros-kinetic-geodesy && \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
-
-RUN echo "export ROSLAUNCH_SSH_UNKNOWN=1" >> /root/.bashrc
-RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc
-RUN echo "export ROS_HOSTNAME=localhost" >> /root/.bashrc
-RUN echo "export ROS_IP=localhost" >> /root/.bashrc
-RUN echo "alias cm='cd /home/$USER/catkin_ws && catkin_make'" >> /root/.bashrc
-RUN echo "alias sourceros='source ~/catkin_ws/devel/setup.bash'" >> /root/.bashrc
-
-
-
-RUN apt-get update
-RUN apt-get install ros-kinetic-rosserial -y
-RUN apt install v4l-utils -y
-RUN echo "export PYTHONPATH=/usr/local/lib/python3.5/dist-packages/" >> /root/.bashrc
-
-
 #####################################################
 # hydra
 #####################################################

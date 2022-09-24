@@ -10,11 +10,14 @@ matplotlib
 opencv-contrib-python
 # sympy
 pandas
-
 ipdb
+
+
 ###### Requirements with Version Specifiers ######
 attrdict
 seaborn
 more_itertools
 hydra-core
 transforms3d
+
+

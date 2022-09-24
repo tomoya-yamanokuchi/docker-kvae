@@ -1,1 +1,1 @@
-docker build ./ -t docker_tensorflow
+docker build ./ -t docker_ros

@@ -83,10 +83,13 @@ setup_env_user () {
 setup_specific_user_setting () {
     sudo chmod 777 /root
 
-    # # ROS
-    # echo "source /home/$USER/catkin_ws/devel/setup.bash" >> /root/.bashrc
-    # sudo mkdir /home/$USER/.ros/
-    # sudo chmod -R 777 /home/$USER/.ros/
+    # ROS
+    echo "source /home/$USER/catkin_ws/devel/setup.bash" >> /root/.bashrc
+    sudo mkdir /home/$USER/.ros/
+    sudo chmod -R 777 /home/$USER/.ros/
+
+    export ROS_MASTER_URI=http://172.17.0.1:11311
+    export ROS_IP=172.17.0.1
 
     export USER=$USER
 
