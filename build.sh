@@ -1,1 +1,1 @@
-docker build ./ -t docker_kvae
+docker build ./ -t docker_tensorflow

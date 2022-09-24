@@ -1,6 +1,6 @@
 ###### Requirements without Version Specifiers ######
-flake8
-black
+# flake8
+# black
 numpy
 matplotlib
 # tensorboard
@@ -11,4 +11,10 @@ opencv-contrib-python
 # sympy
 pandas
 
+ipdb
 ###### Requirements with Version Specifiers ######
+attrdict
+seaborn
+more_itertools
+hydra-core
+transforms3d
